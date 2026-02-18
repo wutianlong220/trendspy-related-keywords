@@ -32,41 +32,50 @@ def get_related_queries(keyword, geo='', timeframe='today 12-m'):
         }
         
         try:
+            print(f"[{keyword}] 开始查询...", flush=True)
+
             # 检查请求限制
+            print(f"[{keyword}] 检查请求限制...", flush=True)
             request_limiter.wait_if_needed()
-            
+            print(f"[{keyword}] 请求限制检查通过", flush=True)
+
             # 添加随机延时
             delay = random.uniform(1, 3)
+            print(f"[{keyword}] 等待 {delay:.1f} 秒后开始请求...", flush=True)
             time.sleep(delay)
-            
+
+            print(f"[{keyword}] 正在调用 Google Trends API (可能需要30-120秒)...", flush=True)
             related_data = tr.related_queries(
                 keyword,
                 headers=headers,
                 geo=geo,
                 timeframe=timeframe
             )
-            print(f"成功获取数据！")
+            print(f"[{keyword}] 成功获取数据！", flush=True)
             return related_data
             
         except Exception as e:
             error_msg = str(e)
-            print(f"尝试获取数据时出错: {error_msg}")
-            
+            print(f"[{keyword}] ❌ 尝试获取数据时出错: {error_msg}", flush=True)
+
             # 如果是配额超限错误，等待后重试
             if "API quota exceeded" in error_msg:
                 wait_time = random.uniform(300, 360)  # 等待5-6分钟
-                print(f"API配额超限，等待 {wait_time:.1f} 秒后重试...")
+                print(f"[{keyword}] ⚠️  API配额超限，等待 {wait_time:.1f} 秒后重试...", flush=True)
                 time.sleep(wait_time)
+                print(f"[{keyword}] 🔄 开始重试...", flush=True)
                 continue  # 继续下一次重试
-            
+
             # 如果是NoneType错误，也等待后重试
             if "'NoneType' object has no attribute 'raise_for_status'" in error_msg:
                 wait_time = random.uniform(60, 120)  # 等待1-2分钟
-                print(f"请求返回为空，等待 {wait_time:.1f} 秒后重试...")
+                print(f"[{keyword}] ⚠️  请求返回为空，等待 {wait_time:.1f} 秒后重试...", flush=True)
                 time.sleep(wait_time)
+                print(f"[{keyword}] 🔄 开始重试...", flush=True)
                 continue  # 继续下一次重试
-                
+
             # 其他错误则直接抛出
+            print(f"[{keyword}] ❌ 遇到不可恢复的错误，停止重试", flush=True)
             raise
 
 def batch_get_queries(keywords, geo='', timeframe='today 12-m', delay_between_queries=5):
@@ -74,25 +83,36 @@ def batch_get_queries(keywords, geo='', timeframe='today 12-m', delay_between_qu
     批量获取多个关键词的数据，带间隔控制
     """
     results = {}
-    
-    for keyword in keywords:
+
+    print(f"\n{'='*60}", flush=True)
+    print(f"开始批量查询 {len(keywords)} 个关键词", flush=True)
+    print(f"{'='*60}\n", flush=True)
+
+    for idx, keyword in enumerate(keywords, 1):
         try:
-            print(f"\n正在查询关键词: {keyword}")
+            print(f"\n[{idx}/{len(keywords)}] 开始处理关键词: {keyword}", flush=True)
             results[keyword] = get_related_queries(keyword, geo, timeframe)
-            
+
             # 在请求之间添加延时
             if keyword != keywords[-1]:  # 如果不是最后一个关键词
                 delay = delay_between_queries + random.uniform(0, 2)  # 基础延时加0-2秒的随机延时
-                print(f"等待 {delay:.1f} 秒后继续下一个查询...")
+                print(f"[{keyword}] ✅ 完成，等待 {delay:.1f} 秒后继续下一个查询...\n", flush=True)
                 time.sleep(delay)
-                
+            else:
+                print(f"[{keyword}] ✅ 完成（最后一个关键词）\n", flush=True)
+
         except Exception as e:
-            print(f"获取 {keyword} 的数据失败: {str(e)}")
+            print(f"[{keyword}] ❌ 获取数据失败: {str(e)}", flush=True)
             results[keyword] = None
-            
+
             # 如果遇到错误，增加额外等待时间
+            print(f"[{keyword}] 等待 10 秒后继续...", flush=True)
             time.sleep(10)
-    
+
+    print(f"\n{'='*60}", flush=True)
+    print(f"批量查询完成！成功: {len([k for k,v in results.items() if v])}/{len(keywords)}", flush=True)
+    print(f"{'='*60}\n", flush=True)
+
     return results
 
 def save_related_queries(keyword, related_data):
