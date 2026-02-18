@@ -34,4 +34,9 @@ jobs:
           TRENDS_RECIPIENT_EMAIL: ${{ secrets.TRENDS_RECIPIENT_EMAIL }}
           TRENDS_WECHAT_RECEIVER: ${{ secrets.TRENDS_WECHAT_RECEIVER }}
         run: |
+          echo "SMTP_SERVER: $TRENDS_SMTP_SERVER"
+          echo "SMTP_PORT: $TRENDS_SMTP_PORT"
+          echo "SENDER_EMAIL: $TRENDS_SENDER_EMAIL"
+          echo "SENDER_PASSWORD_LENGTH: ${#TRENDS_SENDER_PASSWORD}"
+          echo "RECIPIENT_EMAIL: $TRENDS_RECIPIENT_EMAIL"
           python trends_monitor.py --test
