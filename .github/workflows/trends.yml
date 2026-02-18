@@ -1,0 +1,37 @@
+name: Google Trends Monitor
+
+on:
+  # 定时任务：每天 UTC 15:05 执行（北京时间 23:05）
+  schedule:
+    - cron: '5 15 * * *'
+
+  # 支持手动触发（用于测试）
+  workflow_dispatch:
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout 代码
+        uses: actions/checkout@v4
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: 安装依赖
+        run: |
+          pip install -r requirements.txt
+
+      - name: 运行 Google Trends 监控
+        env:
+          TRENDS_SMTP_SERVER: ${{ secrets.TRENDS_SMTP_SERVER }}
+          TRENDS_SMTP_PORT: ${{ secrets.TRENDS_SMTP_PORT }}
+          TRENDS_SENDER_EMAIL: ${{ secrets.TRENDS_SENDER_EMAIL }}
+          TRENDS_SENDER_PASSWORD: ${{ secrets.TRENDS_SENDER_PASSWORD }}
+          TRENDS_RECIPIENT_EMAIL: ${{ secrets.TRENDS_RECIPIENT_EMAIL }}
+          TRENDS_WECHAT_RECEIVER: ${{ secrets.TRENDS_WECHAT_RECEIVER }}
+        run: |
+          python trends_monitor.py --test
