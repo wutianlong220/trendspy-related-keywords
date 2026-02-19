@@ -21,13 +21,149 @@ EMAIL_CONFIG = {
 
 # Keywords to monitor
 KEYWORDS = [
-   
-    "Image",
-    "Video",
-    "Music",
-    "Voice",
-    "Text",
-    # Add more keywords as needed
+    # A
+    "action",
+    "advisor",
+    "agent",
+    "analyzer",
+    "anime",
+    "answer",
+    "assistant",
+
+    # B
+    "Best",
+    "builder",
+
+    # C
+    "calculator",
+    "cartoon",
+    "cataloger",
+    "character",
+    "chart",
+    "chat",
+    "cheat",
+    "checker",
+    "clue",
+    "code",
+    "coloring page",
+    "comparator",
+    "compiler",
+    "composer",
+    "connector",
+    "constructor",
+    "converter",
+
+    # D
+    "crawler",
+    "creator",
+
+    # E
+    "editor",
+    "emoji",
+    "enhancer",
+    "evaluator",
+    "example",
+    "extractor",
+
+    # F
+    "face",
+    "filter",
+    "finder",
+    "font",
+    "format",
+
+    # G
+    "generator",
+    "graph",
+    "guide",
+
+    # H
+    "How to",
+    "helper",
+    "hint",
+    "humanizer",
+
+    # I
+    "icon",
+    "ideas",
+    "illustration",
+    "image",
+    "interior design",
+
+    # L
+    "layout",
+    "list",
+    "logo",
+
+    # M
+    "maker",
+    "manager",
+    "meme",
+    "model",
+    "modifier",
+    "monitor",
+    "music",
+
+    # O
+    "online",
+    "optimizer",
+
+    # P
+    "paraphaser",
+    "pattern",
+    "photo",
+    "picture",
+    "planner",
+    "portal",
+    "portrait",
+    "processor",
+    "product photo",
+
+    # R
+    "receiver",
+    "recorder",
+    "resources",
+    "responder",
+    "restore",
+
+    # S
+    "sample",
+    "scheduler",
+    "scraper",
+    "sender",
+    "simulator",
+    "solver",
+    "song",
+    "sound",
+    "speech",
+    "starter",
+    "style",
+    "summarizer",
+    "syncer",
+
+    # T
+    "tattoo",
+    "template",
+    "tester",
+    "text",
+    "tool",
+    "top",
+    "tracker",
+    "transcriber",
+    "translator",
+
+    # U
+    "uploader",
+    "upscaler",
+
+    # V
+    "verifier",
+    "video",
+    "viewer",
+    "voice",
+
+    # W
+    "writer",
 ]
 
 
@@ -41,10 +177,10 @@ TRENDS_CONFIG = {
 # Rate Limiting Configuration
 RATE_LIMIT_CONFIG = {
     'max_retries': 3,
-    'min_delay_between_queries': 10,  # 最小延迟10秒
-    'max_delay_between_queries': 20,  # 最大延迟20秒
+    'min_delay_between_queries': 30,  # 最小延迟30秒（适应更多关键词）
+    'max_delay_between_queries': 60,  # 最大延迟60秒（适应更多关键词）
     'batch_size': 5,  # 每批处理的关键词数量
-    'batch_interval': 300,  # 批次间隔时间（秒）
+    'batch_interval': 600,  # 批次间隔时间（秒）- 增加到10分钟
 }
 
 # Schedule Configuration
