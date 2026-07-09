@@ -169,7 +169,7 @@ KEYWORDS = [
 
 # Trends Query Configuration
 TRENDS_CONFIG = {
-    'timeframe': 'last-3-d',  # 可选值: now 1-d, now 7-d, now 30-d, now 90-d, today 12-m, 
+    'timeframe': 'now 7-d',  # 可选值: now 1-d, now 7-d, now 30-d, now 90-d, today 12-m,
                             # last-2-d, last-3-d 或者 "2024-01-01 2024-01-31"
     'geo': '',  # 地区代码，例如: 'US' 表示美国, 'CN' 表示中国, '' 表示全球
 }
