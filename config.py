@@ -22,30 +22,22 @@ EMAIL_CONFIG = {
 # Keywords to monitor
 KEYWORDS = [
     # A
-    "action",
     "advisor",
     "agent",
     "analyzer",
-    "anime",
     "answer",
     "assistant",
 
     # B
-    "Best",
     "builder",
 
     # C
     "calculator",
-    "cartoon",
     "cataloger",
-    "character",
     "chart",
-    "chat",
     "cheat",
     "checker",
     "clue",
-    "code",
-    "coloring page",
     "comparator",
     "compiler",
     "composer",
@@ -59,17 +51,14 @@ KEYWORDS = [
 
     # E
     "editor",
-    "emoji",
     "enhancer",
     "evaluator",
-    "example",
     "extractor",
 
     # F
     "face",
     "filter",
     "finder",
-    "font",
     "format",
 
     # G
@@ -84,16 +73,10 @@ KEYWORDS = [
     "humanizer",
 
     # I
-    "icon",
     "ideas",
-    "illustration",
-    "image",
-    "interior design",
 
     # L
     "layout",
-    "list",
-    "logo",
 
     # M
     "maker",
@@ -102,7 +85,6 @@ KEYWORDS = [
     "model",
     "modifier",
     "monitor",
-    "music",
 
     # O
     "online",
@@ -111,13 +93,9 @@ KEYWORDS = [
     # P
     "paraphaser",
     "pattern",
-    "photo",
-    "picture",
     "planner",
     "portal",
-    "portrait",
     "processor",
-    "product photo",
 
     # R
     "receiver",
@@ -133,28 +111,20 @@ KEYWORDS = [
     "sender",
     "simulator",
     "solver",
-    "song",
-    "sound",
-    "speech",
     "starter",
     "style",
     "summarizer",
     "syncer",
 
     # T
-    "tattoo",
     "template",
     "tester",
-    "text",
-    "tool",
-    "top",
     "tracker",
     "transcriber",
     "translator",
 
     # U
     "uploader",
-    "upscaler",
 
     # V
     "verifier",
